@@ -36,14 +36,19 @@ app.get('/', (req, res) => {
     res.render('home', { title });
 });
 
+app.get('/projects', (req, res) => {
+    const title = "Projects";
+    res.render('projects', { title });
+});
+
 app.get('/organizations', (req, res) => {
     const title = "Organizations";
     res.render('organizations', { title });
 });
 
-app.get('/projects', (req, res) => {
-    const title = "Projects";
-    res.render('projects', { title });
+app.get('/categorise', (req, res) => {
+    const title = "Categories";
+    res.render('categories', { title });
 });
 
 app.listen(PORT, () => {
