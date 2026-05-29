@@ -1,4 +1,5 @@
 <%- include('partials/header') %>
+
     <main>
         <h1>
             <%= title %>
@@ -6,15 +7,52 @@
 
         <p>Here are a few of our partner organizations:</p>
 
-        <ul class="images">
-            <% organizations.forEach(org=> { %>
-                <li>
-                    <img src="/image/<%= org.logo_filename %>" alt="<%= org.name %> logo">
-                    <strong>
-                        <%= org.name %>
-                    </strong>: <%= org.contact_email %>
-                </li>
-                <% }); %>
+        <ul>
+            <% if (organizations && organizations.length> 0) { %>
+                <% organizations.forEach(organization=> { %>
+                    <li>
+                        <img src="/image/<%= organization.logo_filename %>" alt="<%= organization.name %> logo">
+                        <strong>
+                            <%= organization.name %>
+                        </strong>:
+                        <%= organization.contact_email %>
+                    </li>
+                    <% }) %>
+                        <% } else { %>
+                            <p>No organizations found.</p>
+                            <% } %>
         </ul>
     </main>
+
     <%- include('partials/footer') %>
+
+
+
+    <!-- iam  commenting out the coder below for learning and experimentation purposes -->
+
+    <!--<% if (false) { %>
+        <%- include('partials/header') %>
+    
+            <main>
+                <h1>
+                    <%= title %>
+                </h1>
+    
+                <p>Here are a few of our partner organizations:</p>
+                <ul>
+    
+                    <% organizations.forEach(organization=> { %>
+                        <li>
+                            <img src="/image/<%= organization.logo_filename %>" alt="<%= organization.name %> logo">
+                            <strong>
+                                <%= organization.name %>
+                            </strong>:
+                            <%= organization.contact_email %>
+                        </li>
+                        <% }); %>
+    
+                </ul>
+            </main>
+    
+            <%- include('partials/footer') %>
+                <% } %>-->

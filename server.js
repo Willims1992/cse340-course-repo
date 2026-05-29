@@ -5,6 +5,7 @@ import path from 'path';
 
 import { testConnection } from './src/models/db.js';
 import { getAllOrganizations } from './src/models/organizations.js';
+import { getAllProjects } from './src/models/projects.js';
 
 const app = express();
 
@@ -40,18 +41,39 @@ app.get('/', (req, res) => {
     res.render('home', { title });
 });
 
-app.get('/projects', (req, res) => {
+app.get('/projects', async (req, res) => {
+    const projects = await getAllProjects();
+    //console.log(projects);
     const title = "Projects";
-    res.render('projects', { title });
+    res.render('projects', { title, projects });
+});
+
+/*app.get('/organizations', async (req, res) => {
+    const organizations = await getAllOrganizations();
+    //just to check if the data is being retrieved correctly from the database
+    console.log(organizations);
+    const title = 'Our Partner Organizations';
+
+    res.render('organizations', { title });
 });
 
 app.get('/organizations', async (req, res) => {
     const organizations = await getAllOrganizations();
+    console.log(organizations);
 
-    
+    const title = 'Our Partner Organizations';
+
+    res.render('organizations', {
+        title,
+        organizations
+    });
+});*/
+
+app.get('/organizations', async (req, res) => {
+    const organizations = await getAllOrganizations();
     //console.log(organizations);
 
-    const title = "Organizations";
+    const title = 'Organizations';
     res.render('organizations', { title, organizations });
 });
 
