@@ -1,3 +1,5 @@
+
+
 <%- include('partials/header') %>
 
     <main>
@@ -5,16 +7,26 @@
             <%= title %>
         </h1>
 
-        <p>
-            Explore our various service categories to find opportunities that match your interests:
-        </p>
+        <h2>Upcoming Service Projects</h2>
 
         <ul>
-            <% categories.forEach(category=> { %>
-                <li>
-                    <%= category.name %>
-                </li>
-                <% }) %>
+            <% if (projects && projects.length> 0) { %>
+                <% projects.forEach(project=> { %>
+                    <li>
+                        <!-- Format date -->
+                        <% const formattedDate=new Date(project.project_date) .toLocaleDateString('en-US', {
+                            year: 'numeric' , month: 'long' , day: 'numeric' }); %>
+
+                            <%= formattedDate %>:
+                                <strong>
+                                    <%= project.title %>
+                                </strong>
+                                (<%= project.organization_name %>)
+                    </li>
+                    <% }) %>
+                        <% } else { %>
+                            <p>No projects available.</p>
+                            <% } %>
         </ul>
     </main>
 
