@@ -1,3 +1,4 @@
+//console.log("DEBUG getAllCategories:", getAllCategories);
 import express from 'express';
 
 import { fileURLToPath } from 'url';
@@ -6,6 +7,8 @@ import path from 'path';
 import { testConnection } from './src/models/db.js';
 import { getAllOrganizations } from './src/models/organizations.js';
 import { getAllProjects } from './src/models/projects.js';
+import { getAllCategories } from './src/models/categories.js';
+``
 
 const app = express();
 
@@ -77,9 +80,11 @@ app.get('/organizations', async (req, res) => {
     res.render('organizations', { title, organizations });
 });
 
-app.get('/categorise', (req, res) => {
+app.get('/categories', async (req, res) => {
+    const categories = await getAllCategories();
+    //console.log(categories);
     const title = "Categories";
-    res.render('categories', { title });
+    res.render('categories', { title, categories });
 });
 
 
