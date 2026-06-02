@@ -1,0 +1,125 @@
+AI Coaching Session Transcript
+
+Coach:
+Welcome! Just to be clear from the start, this is a coaching session, not a test. It is perfectly okay—and even encouraged—to say "I don't know" or "I made a mistake." That's the fastest way we'll learn today.
+
+Hi — can you tell me your name?
+
+Student:
+Ofonime William
+
+----------------------------------------
+
+Topic 1: Relational Database Design and Structure
+
+Coach:
+Please paste your SQL code for your tables and explain their purpose and relationships.
+
+Student:
+CREATE TABLE service_projects (
+    project_id SERIAL PRIMARY KEY,
+    organization_id INT NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    location VARCHAR(255) NOT NULL,
+    project_date DATE NOT NULL,
+    FOREIGN KEY (organization_id) REFERENCES organizations(organization_id)
+);
+
+Purpose of the service_projects Table:
+The service_projects table stores information about projects organized by organizations, including title, description, location, and date.
+
+Relationship with organizations:
+There is a one-to-many relationship:
+One organization → many projects
+Each project → one organization
+
+Coach question:
+Please provide your categories and junction table and explain the many-to-many relationship.
+
+Student:
+CREATE TABLE categories (
+    category_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE service_project_categories (
+    project_id INT NOT NULL,
+    category_id INT NOT NULL,
+    PRIMARY KEY (project_id, category_id),
+    FOREIGN KEY (project_id) REFERENCES service_projects(project_id) ON DELETE CASCADE,
+    FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE CASCADE
+);
+
+Explanation:
+The relationship is many-to-many because one project can have multiple categories, and one category can belong to multiple projects. The junction table connects both.
+
+----------------------------------------
+
+Topic 2: Server-Side Data Access Logic (Node.js)
+
+Coach:
+Please paste your Node.js function that retrieves categories and explain the data flow.
+
+Student:
+const getAllCategories = async () => {
+    const query = `
+        SELECT category_id, name FROM categories ORDER BY category_id
+    `;
+
+    const result = await db.query(query);
+    return result.rows;
+}
+
+Explanation:
+The function sends a query to the database using db.query(). The database returns results, which are stored in result.rows. These are returned to the server for use in rendering or API responses.
+
+----------------------------------------
+
+Topic 3: Express Server Logic and Routing
+
+Coach:
+Please paste your route handler and explain its role.
+
+Student:
+app.get('/categories', async (req, res) => {
+    const categories = await getAllCategories();
+    const title = "Categories";
+    res.render('categories', { title, categories });
+});
+
+Explanation:
+This route handles requests to /categories. It calls getAllCategories() to retrieve data, then passes the data to the EJS template using res.render(), which sends the rendered page back to the browser.
+
+----------------------------------------
+
+Topic 4: Client-Side Rendering (EJS Templates)
+
+Coach:
+Please paste your EJS code and explain how the data is displayed.
+
+Student:
+<ul>
+    <% categories.forEach(category => { %>
+        <li>
+            <%= category.name %>
+        </li>
+    <% }) %>
+</ul>
+
+Explanation:
+The categories data is passed from the server to the EJS template. The forEach loop goes through each category object and displays the category.name inside a list item. This allows dynamic rendering of data from the database.
+
+----------------------------------------
+
+Session Conclusion:
+
+The student demonstrated understanding of:
+
+- Relational database design and relationships (one-to-many and many-to-many)
+- SQL queries and table structure
+- Node.js data retrieval using async/await
+- Express routing and request handling
+- EJS templating and dynamic data rendering
+
+End of Session

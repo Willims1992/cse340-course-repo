@@ -29,15 +29,7 @@ VALUES
 -- ========================================
 -- Service Projects Table
 -- ========================================
-CREATE TABLE service_projects (
-    project_id SERIAL PRIMARY KEY,
-    organization_id INT NOT NULL,
-    title VARCHAR(255) NOT NULL,
-    description TEXT NOT NULL,
-    location VARCHAR(255) NOT NULL,
-    project_date DATE NOT NULL,
-    FOREIGN KEY (organization_id) REFERENCES organizations(organization_id)
-);
+
 
 -- ========================================
 -- Insert Service Projects (15 projects)
