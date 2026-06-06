@@ -1,4 +1,4 @@
-console.log("DB_URL VALUE:", process.env.DB_URL);
+console.log("DB_URL:", process.env.DB_URL);
 import { Pool } from 'pg';
 
 /**
