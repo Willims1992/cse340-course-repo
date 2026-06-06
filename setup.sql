@@ -4,6 +4,7 @@
 -- ========================================
 -- Organization Table
 -- ========================================
+
 DROP TABLE IF EXISTS service_project_categories CASCADE;
 DROP TABLE IF EXISTS categories CASCADE;
 DROP TABLE IF EXISTS service_projects CASCADE;
