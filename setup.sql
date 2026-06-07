@@ -20,17 +20,28 @@ CREATE TABLE organizations (
 );
 
 -- ========================================
--- Insert Organizations
+-- Insert Organizations ✅ FIXED IMAGE NAMES
 -- ========================================
 
 INSERT INTO organizations (name, description, contact_email, logo_filename)
 VALUES
-('BrightFuture Builders', 'A nonprofit focused on improving community infrastructure.', 'info@brightfuturebuilders.org', 'logo1.png'),
-('GreenHarvest Growers', 'Urban farming and sustainability education.', 'contact@greenharvest.org', 'logo2.png'),
-('UnityServe Volunteers', 'Volunteer coordination group.', 'hello@unityserve.org', 'logo3.png');
+('BrightFuture Builders',
+ 'A nonprofit focused on improving community infrastructure.',
+ 'info@brightfuturebuilders.org',
+ 'brightfuture-logo.png'),
+
+('GreenHarvest Growers',
+ 'Urban farming and sustainability education.',
+ 'contact@greenharvest.org',
+ 'greenharvest-logo.png'),
+
+('UnityServe Volunteers',
+ 'Volunteer coordination group.',
+ 'hello@unityserve.org',
+ 'unityserve-logo.png');
 
 -- ========================================
--- Service Projects Table ✅ FIXED
+-- Service Projects Table
 -- ========================================
 
 CREATE TABLE service_projects (
@@ -102,7 +113,7 @@ CREATE TABLE service_project_categories (
 );
 
 -- ========================================
--- Assign EACH project at least one category
+-- Assign Categories to Projects
 -- ========================================
 
 INSERT INTO service_project_categories (project_id, category_id) VALUES
@@ -111,7 +122,7 @@ INSERT INTO service_project_categories (project_id, category_id) VALUES
 (11,4),(12,1),(13,4),(14,3),(15,3);
 
 -- ========================================
--- VERIFY RESULTS
+-- VERIFY DATA ✅
 -- ========================================
 
 SELECT * FROM organizations;

@@ -11,7 +11,7 @@
             <% if (organizations && organizations.length> 0) { %>
                 <% organizations.forEach(organization=> { %>
                     <li>
-                        <img src="/image/<%= organization.logo_filename %>" alt="<%= organization.name %> logo">
+                        <img src="/images/<%= organization.logo_filename %>" alt="<%= organization.name %> logo">
                         <strong>
                             <%= organization.name %>
                         </strong>:
@@ -43,7 +43,7 @@
     
                     <% organizations.forEach(organization=> { %>
                         <li>
-                            <img src="/image/<%= organization.logo_filename %>" alt="<%= organization.name %> logo">
+                            <img src="/images/<%= organization.logo_filename %>" alt="<%= organization.name %> logo">
                             <strong>
                                 <%= organization.name %>
                             </strong>:
