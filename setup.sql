@@ -1,14 +1,15 @@
 -- ========================================
 -- RESET (clean setup)
---========================================
--- ========================================
--- Organization Table
 -- ========================================
 
 DROP TABLE IF EXISTS service_project_categories CASCADE;
 DROP TABLE IF EXISTS categories CASCADE;
 DROP TABLE IF EXISTS service_projects CASCADE;
 DROP TABLE IF EXISTS organizations CASCADE;
+
+-- ========================================
+-- Organization Table
+-- ========================================
 
 CREATE TABLE organizations (
     organization_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -21,6 +22,7 @@ CREATE TABLE organizations (
 -- ========================================
 -- Insert Organizations
 -- ========================================
+
 INSERT INTO organizations (name, description, contact_email, logo_filename)
 VALUES
 ('BrightFuture Builders', 'A nonprofit focused on improving community infrastructure.', 'info@brightfuturebuilders.org', 'logo1.png'),
@@ -28,13 +30,25 @@ VALUES
 ('UnityServe Volunteers', 'Volunteer coordination group.', 'hello@unityserve.org', 'logo3.png');
 
 -- ========================================
--- Service Projects Table
+-- Service Projects Table ✅ FIXED
 -- ========================================
 
+CREATE TABLE service_projects (
+    project_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    organization_id INT NOT NULL,
+    title VARCHAR(150) NOT NULL,
+    description TEXT NOT NULL,
+    location VARCHAR(100) NOT NULL,
+    project_date DATE NOT NULL,
+    FOREIGN KEY (organization_id)
+        REFERENCES organizations(organization_id)
+        ON DELETE CASCADE
+);
 
 -- ========================================
 -- Insert Service Projects (15 projects)
 -- ========================================
+
 INSERT INTO service_projects (organization_id, title, description, location, project_date) VALUES
 (1,'Food Drive','Distribute food','Benin','2026-06-01'),
 (1,'Community Cleanup','Clean environment','Lagos','2026-06-05'),
@@ -57,6 +71,7 @@ INSERT INTO service_projects (organization_id, title, description, location, pro
 -- ========================================
 -- Categories Table
 -- ========================================
+
 CREATE TABLE categories (
     category_id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL UNIQUE
@@ -65,6 +80,7 @@ CREATE TABLE categories (
 -- ========================================
 -- Insert Categories
 -- ========================================
+
 INSERT INTO categories (name) VALUES
 ('Education'),
 ('Healthcare'),
@@ -74,17 +90,21 @@ INSERT INTO categories (name) VALUES
 -- ========================================
 -- Junction Table (Many-to-Many)
 -- ========================================
+
 CREATE TABLE service_project_categories (
     project_id INT NOT NULL,
     category_id INT NOT NULL,
     PRIMARY KEY (project_id, category_id),
-    FOREIGN KEY (project_id) REFERENCES service_projects(project_id) ON DELETE CASCADE,
-    FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE CASCADE
+    FOREIGN KEY (project_id)
+        REFERENCES service_projects(project_id) ON DELETE CASCADE,
+    FOREIGN KEY (category_id)
+        REFERENCES categories(category_id) ON DELETE CASCADE
 );
 
 -- ========================================
--- Assign EACH project at least one category ✅
+-- Assign EACH project at least one category
 -- ========================================
+
 INSERT INTO service_project_categories (project_id, category_id) VALUES
 (1,4),(2,3),(3,1),(4,2),(5,3),
 (6,1),(7,3),(8,4),(9,1),(10,2),
@@ -93,4 +113,8 @@ INSERT INTO service_project_categories (project_id, category_id) VALUES
 -- ========================================
 -- VERIFY RESULTS
 -- ========================================
+
 SELECT * FROM organizations;
+SELECT * FROM service_projects;
+SELECT * FROM categories;
+SELECT * FROM service_project_categories;
