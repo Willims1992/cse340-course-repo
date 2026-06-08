@@ -1,4 +1,4 @@
-console.log("DB_URL:", process.env.DB_URL);
+console.log("DATABASE_URL:", process.env.DATABASE_URL);
 import { Pool } from 'pg';
 
 /**
@@ -13,7 +13,7 @@ import { Pool } from 'pg';
  * postgresql://username:password@host:port/database
  */
 const pool = new Pool({
-    connectionString: process.env.DB_URL,
+    connectionString: process.env.DATABASE_URL,
 
     ssl: {
         rejectUnauthorized: false,
