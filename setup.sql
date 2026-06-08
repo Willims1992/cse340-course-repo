@@ -24,6 +24,7 @@ CREATE TABLE organizations (
 -- ========================================
 
 INSERT INTO organizations (name, description, contact_email, logo_filename)
+
 VALUES
 ('BrightFuture Builders',
  'A nonprofit focused on improving community infrastructure.',
